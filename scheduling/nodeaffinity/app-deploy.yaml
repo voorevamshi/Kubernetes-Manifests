@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-one
+spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+          - matchExpressions:
+              - key: a
+                operator: In
+                values:
+                  - b
+                  - c
+  containers:
+    - name: nginx
+      image: nginx
+      imagePullPolicy: IfNotPresent

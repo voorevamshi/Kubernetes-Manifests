@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mydb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mydb
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: mydb
+    spec:
+      containers:
+        - image: mysql
+          name: mysql
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: test
+          volumeMounts:
+            - name: mysql-vol
+              mountPath: /etc/my.cnf
+              subPath: my.cnf
+#            - name: mysql-vol
+#              mountPath: /ym.cnf
+#              subPath: ym.cnf
+      volumes:
+        - name: mysql-vol
+          configMap:
+            name: mysql-conf
+
+

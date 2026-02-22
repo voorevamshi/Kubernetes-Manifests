@@ -1,0 +1,27 @@
+wordpressDeploy:
+  name: wordpress-app
+  replicaCount: 1
+  imageTag: 4.8-apache
+  containerPort: 80
+  pvcName: wordpress-pvc
+wordpressSvc:
+  name: wordpress-svc
+  svcPort: 8080
+  targetPort: 80
+wordpressPvc:
+  name: wordpress-pvc
+  scName: manual
+  accessMode: ReadWriteOnce
+  capacity: 1Gi
+wordpressPv:
+  name: wordpress-pv
+  scName: manual
+  accessMode: ReadWriteOnce
+  hostPath: /var/www/html
+appIngress:
+  name: wordpress-ingress
+  ingressType: kong
+  svcName: wordpress-svc
+  svcPort: 8080
+global:
+  mysqlSecret: bXlzcWxteXNxbA==

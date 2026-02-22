@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: student-app-tom
+spec:
+  containers:
+    - name: student-app
+      image: nginx
+      ports:
+        - containerPort: 80
+      imagePullPolicy: IfNotPresent
